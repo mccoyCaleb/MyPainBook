@@ -1,0 +1,6 @@
+<description>this is my button system</description>
+this is my log of making this system that auto adds text files to 
+be interpreted with both html and text to display what ever
+i use AI to make very easily without having to make a page 
+each time with html and css and yada yada
+this one is not a serious one but later i will log more in detail

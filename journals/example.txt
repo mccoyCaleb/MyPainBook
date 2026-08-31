@@ -1,0 +1,4 @@
+<description>Example description to hide in modal</description>
+This is the displayed text.
+<img src="../images/cyber.png">
+More text below the image.12341

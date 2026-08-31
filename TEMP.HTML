@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carousel</title>
+  <link rel="stylesheet" href="./css/style2.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="main-heading">Responsive Carousel</h1>
+    <div class="content">
+      <div class="carousel-content">
+        <h1 class="carousel-heading">GeeksforGeeks</h1>
+        <h3>A computer science portal for geeks</h3>
+      </div>
+      <button id="prevBtn" class="nav-btn">"---&gt;"</button>
+      <button id="nextBtn" class="nav-btn">"&lt;----"</button>
+
+      <div class="slideshow">
+        <button class="slide-btn slide-btn-1"></button>
+        <button class="slide-btn slide-btn-2"></button>
+        <button class="slide-btn slide-btn-3"></button>
+        <button class="slide-btn slide-btn-4"></button>
+        <div class="slideshow-wrapper">
+          <div class="slide">
+            <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818140124/image1-300x169.png" alt="Image 1">
+          </div>
+          <div class="slide">
+            <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818140126/image2-300x169.png" alt="Image 2">
+          </div>
+          <div class="slide">
+            <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818190339/image5-300x185.png" alt="Image 3">
+          </div>
+          <div class="slide">
+            <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818141837/image4-300x168.png" alt="Image 4">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
+
+function showSlide(index) {
+
+    // Remove active class from all slides
+    slides.forEach(slide => {
+        slide.classList.remove('active');
+    });
+
+    // Wrap around if needed
+    if (index >= slides.length) {
+        currentSlide = 0;
+    }
+    else if (index < 0) {
+        currentSlide = slides.length - 1;
+    }
+    else {
+        currentSlide = index;
+    }
+
+    slides[currentSlide].classList.add('active');
+}
+
+// Next button
+document.getElementById('nextBtn').addEventListener('click', () => {
+    showSlide(currentSlide + 1);
+});
+
+// Previous button
+document.getElementById('prevBtn').addEventListener('click', () => {
+    showSlide(currentSlide - 1);
+});
+
+// Keyboard controls
+document.addEventListener('keydown', (event) => {
+
+    if (event.key === 'ArrowRight') {
+        showSlide(currentSlide + 1);
+    }
+
+    if (event.key === 'ArrowLeft') {
+        showSlide(currentSlide - 1);
+    }
+
+});
+
+// Initialize
+showSlide(0);
+</script>
+</body>
+</html>

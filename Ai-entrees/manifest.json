@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Example Entry",
+    "file": "example.txt",
+    "description": "This is the description shown on the button."
+  },
+  {
+    "name": "this button system",
+    "file": "buttonSystem.txt",
+    "description": "this is my button system"
+  }
+]

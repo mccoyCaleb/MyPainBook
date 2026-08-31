@@ -1,0 +1,636 @@
+What I Asked — see below for each instance like 1 the tongle bar
+
+Why I Asked — just try to add some features and learn how to prompt because we were told to use ai
+
+What Did AI Give Me? — it gave me some complicated html but it made changes to the about me html and css whch will be added to more places
+
+What Did I Change? — it was more of an addition, it didnt change much, it just added features
+
+Did It Work? — yes and i like how it did it
+
+
+prompt used: can you build a tongle bar with the pages/ navigation in it, i want it to move in and out on the left side of the page  make it on the about page but make it easily attachable to other pages, and the button with be on the left, and it will move in and out with css and java, keep the button there but make it stay at the right side of the frame used to attach everything when it open and closes to its orignial position, make it work with the current code standard i have and the styles from the styles css
+
+
+
+**ADDED**
+
+*changed*
+
+&#x20; = added , also i removed all ">" so it wont render
+
+code given : page about me: <!DOCTYPE html 
+
+<html 
+
+<head 
+
+&#x20;  **<meta charset="UTF-8" **
+
+&#x20;  **<meta name="viewport" content="width=device-width, initial-scale=1.0" **
+
+&#x20;  **<title About | Caleb McCoy</title **
+
+&#x20;  <link rel="stylesheet" href="./css/styles.css" 
+
+</head 
+
+<body 
+
+**<div class="sidebar-shell" data-sidebar **
+
+&#x20; **<nav class="sidebar-nav" aria-label="Main navigation" **
+
+&#x20;   **<h2 Menu</h2 **
+
+&#x20;   **<a href="./index.html" home</a **
+
+&#x20;   **<a href="./about.html" class="active" about</a **
+
+&#x20;   **<a href="./ai-log.html" ai-log</a **
+
+&#x20;   **<a href="./journal.html" journal</a **
+
+&#x20;   **<a href="./projects.html" projects</a **
+
+&#x20; **</nav **
+
+&#x20; **<button class="sidebar-toggle" data-sidebar-toggle aria-label="Open navigation" aria-expanded="false" ☰</button **
+
+</div 
+
+
+
+*<div class="page-content" *
+
+&#x20; *<div class="header" *
+
+&#x20;   *<h1 Caleb McCoys website</h1 *
+
+&#x20; *</div *
+
+
+
+&#x20; <p grade level: senior</p 
+
+
+
+&#x20; <p Programing experience</p 
+
+&#x20; <ul 
+
+&#x20;   <li Ap csp(4)</li 
+
+&#x20;   <li Ap csa(4)</li 
+
+&#x20;   <li gyro quest(game)</li 
+
+&#x20;   <li hackathon game</li 
+
+&#x20;   <li many games</li 
+
+&#x20;   <li discord bots</li 
+
+&#x20;   <li build websites for businesses</li 
+
+&#x20; </ul 
+
+
+
+&#x20; <p just go to the projects page if you really want see the stuff</p 
+
+&#x20; <h1 why</h1 
+
+&#x20; <p its fun, I can do what I want, I can make random projects, maybe make money</p 
+
+&#x20; <h1 goals</h1 
+
+&#x20; <ul 
+
+&#x20;   <li make website</li 
+
+&#x20;   <li graduate</li 
+
+&#x20;   <li make money</li 
+
+&#x20; </ul 
+
+&#x20; <h1 Also i am certified</h1 
+
+&#x20; <img src="./images/cyber.png" alt="Certification" 
+
+&#x20; <img src="./images/HackTheBoc.webp" alt="HackTheBoc certificate" 
+
+&#x20; <img src="./images/Aplus.webp" alt="Aplus certificate" 
+
+</div 
+
+
+
+**<script src="./js/script.js" </script **
+
+</body 
+
+</html script :
+
+**document.addEventListener("DOMContentLoaded", () =  {**
+
+&#x20; **const sidebars = document.querySelectorAll("\[data-sidebar]");**
+
+
+
+&#x20; **sidebars.forEach((sidebar) =  {**
+
+&#x20;   **const toggle = sidebar.querySelector("\[data-sidebar-toggle]");**
+
+
+
+&#x20;   **if (!toggle) return;**
+
+
+
+&#x20;   **const setOpen = (isOpen) =  {**
+
+&#x20;     **sidebar.classList.toggle("is-open", isOpen);**
+
+&#x20;     **toggle.setAttribute("aria-expanded", String(isOpen));**
+
+&#x20;     **toggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");**
+
+&#x20;     **toggle.textContent = isOpen ? "‹" : "☰";**
+
+&#x20;   **};**
+
+
+
+&#x20;   **toggle.addEventListener("click", () =  {**
+
+&#x20;     **const isOpen = sidebar.classList.contains("is-open");**
+
+&#x20;     **setOpen(!isOpen);**
+
+&#x20;   **});**
+
+
+
+&#x20;   **setOpen(false);**
+
+&#x20; **});**
+
+**});**
+
+css
+
+body {
+
+&#x20; margin: 0;
+
+&#x20; font-family: sans-serif;
+
+&#x20; background: #f0f0f0;
+
+&#x20; color: #1f2937;
+
+}
+
+
+
+.header {
+
+&#x20; background: #ff0000;
+
+&#x20; color: white;
+
+&#x20; padding: 20px;
+
+&#x20; display: flex;
+
+&#x20; justify-content: space-between;
+
+&#x20; align-items: center;
+
+}
+
+
+
+.back button {
+
+&#x20; background: #7d0101;
+
+&#x20; color: white;
+
+&#x20; border: none;
+
+&#x20; padding: 10px 15px;
+
+&#x20; cursor: pointer;
+
+}
+
+
+
+.banner {
+
+&#x20; background: #00a6ff;
+
+&#x20; color: white;
+
+&#x20; padding: 20px;
+
+&#x20; width: 100%;
+
+&#x20; box-sizing: border-box;
+
+}
+
+
+
+nav a {
+
+&#x20; margin-right: 12px;
+
+&#x20; color: #0366d6;
+
+&#x20; text-decoration: none;
+
+}
+
+
+
+form {
+
+&#x20; margin-top: 20px;
+
+&#x20; display: grid;
+
+&#x20; gap: 10px;
+
+&#x20; max-width: 320px;
+
+}
+
+
+
+label {
+
+&#x20; display: grid;
+
+&#x20; gap: 4px;
+
+}
+
+
+
+input {
+
+&#x20; padding: 8px;
+
+&#x20; border: 1px solid #ccc;
+
+}
+
+
+
+button {
+
+&#x20; padding: 10px;
+
+&#x20; background: #0366d6;
+
+&#x20; color: white;
+
+&#x20; border: none;
+
+}
+
+
+
+**/\* Sidebar system \*/**
+
+**.sidebar-shell {**
+
+&#x20; **position: fixed;**
+
+&#x20; **top: 0;**
+
+&#x20; **left: 0;**
+
+&#x20; **height: 100vh;**
+
+&#x20; **z-index: 1000;**
+
+&#x20; **pointer-events: none;**
+
+**}**
+
+
+
+**.sidebar-nav {**
+
+&#x20; **position: absolute;**
+
+&#x20; **top: 0;**
+
+&#x20; **left: 0;**
+
+&#x20; **width: 230px;**
+
+&#x20; **height: 100vh;**
+
+&#x20; **background: #111827;**
+
+&#x20; **color: #ffffff;**
+
+&#x20; **padding: 24px 18px;**
+
+&#x20; **box-sizing: border-box;**
+
+&#x20; **box-shadow: 3px 0 18px rgba(0, 0, 0, 0.2);**
+
+&#x20; **transform: translateX(-100%);**
+
+&#x20; **transition: transform 0.3s ease;**
+
+&#x20; **pointer-events: auto;**
+
+**}**
+
+
+
+**.sidebar-shell.is-open .sidebar-nav {**
+
+&#x20; **transform: translateX(0);**
+
+**}**
+
+
+
+**.sidebar-nav h2 {**
+
+&#x20; **font-size: 1.3rem;**
+
+&#x20; **margin: 0 0 20px;**
+
+**}**
+
+
+
+**.sidebar-nav a {**
+
+&#x20; **display: block;**
+
+&#x20; **margin: 0 0 12px;**
+
+&#x20; **padding: 10px 12px;**
+
+&#x20; **color: #e5e7eb;**
+
+&#x20; **text-decoration: none;**
+
+&#x20; **border-radius: 8px;**
+
+&#x20; **transition: background 0.2s ease;**
+
+**}**
+
+
+
+**.sidebar-nav a:hover,**
+
+**.sidebar-nav a.active {**
+
+&#x20; **background: #0366d6;**
+
+**}**
+
+
+
+**.sidebar-toggle {**
+
+&#x20; **position: absolute;**
+
+&#x20; **top: 20px;**
+
+&#x20; **right: -46px;**
+
+&#x20; **width: 46px;**
+
+&#x20; **height: 56px;**
+
+&#x20; **border: none;**
+
+&#x20; **border-radius: 0 10px 10px 0;**
+
+&#x20; **background: #111827;**
+
+&#x20; **color: white;**
+
+&#x20; **font-size: 1.2rem;**
+
+&#x20; **cursor: pointer;**
+
+&#x20; **box-shadow: 3px 0 14px rgba(0, 0, 0, 0.18);**
+
+&#x20; **transition: background 0.2s ease, transform 0.2s ease;**
+
+&#x20; **pointer-events: auto;**
+
+**}**
+
+
+
+**.sidebar-shell.is-open .sidebar-toggle {**
+
+&#x20; **background: #0366d6;**
+
+**}**
+
+
+
+**.sidebar-toggle:hover {**
+
+&#x20; **transform: translateY(-1px);**
+
+**}**
+
+
+
+**.page-content {**
+
+&#x20; **padding: 20px 24px 48px;**
+
+&#x20; **transition: margin-left 0.3s ease;**
+
+**}**
+
+
+
+**.sidebar-shell.is-open + .page-content {**
+
+&#x20; **margin-left: 230px;**
+
+**}**
+
+
+
+img {
+
+&#x20; max-width: 220px;
+
+&#x20; display: block;
+
+&#x20; margin: 16px 0;
+
+}
+
+
+
+second promt:  
+
+can you make the nav bar move with the incoming side bar, and make it dark red background, and red select and selected  colors
+
+
+
+css: .sidebar-shell {
+
+&#x20; position: fixed;
+
+&#x20; top: 0;
+
+&#x20; left: 0;
+
+&#x20; height: 100vh;
+
+&#x20; z-index: 1000;
+
+&#x20; pointer-events: none;
+
+&#x20; **transition: transform 0.3s ease;**
+
+}
+
+**.sidebar-shell.is-open .sidebar-toggle {**
+
+&#x20; **background: #a00000;**
+
+**}**
+
+.sidebar-toggle {
+
+&#x20; position: absolute;
+
+&#x20; top: 20px;
+
+&#x20; right: -46px;
+
+&#x20; width: 46px;
+
+&#x20; height: 56px;
+
+&#x20; border: none;
+
+&#x20; border-radius: 0 10px 10px 0;
+
+&#x20; **background: #3d0000;**
+
+&#x20; color: #fff;
+
+&#x20; font-size: 1.2rem;
+
+&#x20; cursor: pointer;
+
+&#x20; box-shadow: 3px 0 14px rgba(0, 0, 0, 0.25);
+
+&#x20; transition: background 0.2s ease, transform 0.2s ease;
+
+&#x20; pointer-events: auto;
+
+}
+
+prompt settings mode:
+about me html:
+
+  <div class="settings-shell" data-settings 
+    <button class="settings-toggle" data-settings-toggle type="button" aria-label="Open settings" aria-expanded="false" ⚙</button 
+    <aside class="settings-panel" aria-label="Settings" 
+      <h2 Settings</h2 
+      <label class="settings-option" 
+        <span Dark mode</span 
+        <input type="checkbox" data-theme-toggle 
+      </label 
+      <label class="settings-option settings-range" 
+        <span Font size <output data-font-size-value 100%</output </span 
+        <input type="range" data-font-size min="80" max="130" value="100" step="5" 
+      </label 
+      <label class="settings-option" 
+        <span ADHD mode</span 
+        <input type="checkbox" data-adhd-toggle 
+      </label 
+      <video class="adhd-video" data-adhd-video controls loop preload="metadata" aria-label="ADHD mode video" 
+        <source src="./images/10 Minutes Minecraft Parkour Gameplay [Free to Use] [Download] - GianLeco (1080p, h264, youtube).mp4" type="video/mp4" 
+        Your browser does not support the video tag.
+      </video 
+    </aside 
+  </div 
+
+styles.css
+ var(--page-background, #f0f0f0);
+  color: var(--page-text, #1f2937);
+  font-size: var(--site-font-size, 100%);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body.dark-mode {
+  --page-background: #111111;
+  --page-text: #f5f5f5;
+
+script.js
+
+  const settings = document.querySelector('[data-settings]');
+  if (!settings) return;
+
+  const settingsToggle = settings.querySelector('[data-settings-toggle]');
+  const themeToggle = settings.querySelector('[data-theme-toggle]');
+  const fontSize = settings.querySelector('[data-font-size]');
+  const fontSizeValue = settings.querySelector('[data-font-size-value]');
+  const adhdToggle = settings.querySelector('[data-adhd-toggle]');
+  const adhdVideo = settings.querySelector('[data-adhd-video]');
+
+  const savedTheme = localStorage.getItem('site-theme') === 'dark';
+  const savedFontSize = localStorage.getItem('site-font-size') || '100';
+  const savedAdhdMode = localStorage.getItem('site-adhd-mode') === 'true';
+
+  const setTheme = (isDark) =  {
+    document.body.classList.toggle('dark-mode', isDark);
+    themeToggle.checked = isDark;
+    localStorage.setItem('site-theme', isDark ? 'dark' : 'light');
+  };
+
+  const setFontSize = (size) =  {
+    document.documentElement.style.setProperty('--site-font-size', `${size}%`);
+    fontSize.value = size;
+    fontSizeValue.value = `${size}%`;
+    localStorage.setItem('site-font-size', size);
+  };
+
+  const setAdhdMode = (isEnabled) =  {
+    settings.classList.toggle('adhd-enabled', isEnabled);
+    adhdToggle.checked = isEnabled;
+    localStorage.setItem('site-adhd-mode', String(isEnabled));
+    if (isEnabled) adhdVideo.play().catch(() =  {});
+    else adhdVideo.pause();
+  };
+
+  settingsToggle.addEventListener('click', () =  {
+    const isOpen = settings.classList.toggle('is-open');
+    settingsToggle.setAttribute('aria-expanded', String(isOpen));
+    settingsToggle.setAttribute('aria-label', isOpen ? 'Close settings' : 'Open settings');
+  });
+  themeToggle.addEventListener('change', () =  setTheme(themeToggle.checked));
+  fontSize.addEventListener('input', () =  setFontSize(fontSize.value));
+  adhdToggle.addEventListener('change', () =  setAdhdMode(adhdToggle.checked));
+
+  setTheme(savedTheme);
+  setFontSize(savedFontSize);
+  setAdhdMode(savedAdhdMode);
+

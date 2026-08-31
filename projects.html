@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Projects | Caleb McCoy</title>
+	<script>if (localStorage.getItem('site-theme') === 'dark') document.documentElement.classList.add('dark-mode');</script>
+	<link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+	<div class="sidebar-shell" data-sidebar>
+		<nav class="sidebar-nav" aria-label="Main navigation">
+			<h2>Menu</h2>
+			<a href="./index.html">home</a>
+			<a href="./about.html">about</a>
+			<a href="./ai-log.html">ai-log</a>
+			<a href="./journal.html">journal</a>
+			<a href="./projects.html" class="active" aria-current="page">projects</a>
+			<button class="sidebar-toggle" data-sidebar-toggle type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+		</nav>
+	</div>
+
+	<div class="page-content">
+		<div class="header">
+			<h1>Caleb McCoys website</h1>
+		</div>
+
+		<div class="settings-shell" data-settings>
+			<button class="settings-toggle" data-settings-toggle type="button" aria-label="Open settings" aria-expanded="false">⚙</button>
+			<aside class="settings-panel" aria-label="Settings">
+				<h2>Settings</h2>
+				<label class="settings-option">
+					<span>Dark mode</span>
+					<input type="checkbox" data-theme-toggle>
+				</label>
+				<label class="settings-option settings-range">
+					<span>Font size <output data-font-size-value>100%</output></span>
+					<input type="range" data-font-size min="80" max="130" value="100" step="5">
+				</label>
+				<label class="settings-option">
+					<span>ADHD mode</span>
+					<input type="checkbox" data-adhd-toggle>
+				</label>
+			</aside>
+		</div>
+
+		<div class="adhd-gif-shell" data-adhd-gif>
+			<img class="adhd-gif" src="./images/10 Minutes Minecraft Parkour Gameplay [Free to Use] [Download] - GianLeco (1080p, h264, youtube).gif" alt="Minecraft parkour gameplay for ADHD mode">
+		</div>
+
+		<p>nothing here yet</p>
+		<div id="entries"></div>
+		<div id="modal"><div class="card"><div class="header-box"><h2 id="title"></h2><button class="close" id="close">×</button></div><div class="body"><div class="content" id="content"></div></div></div></div>
+	</div>
+
+	<script src="./js/script.js"></script>
+	<script>
+	const entries=document.getElementById('entries');
+    const modal=document.getElementById('modal');
+    const title=document.getElementById('title');
+    const content=document.getElementById('content');
+    const close=document.getElementById('close');
+    const journalBase='./projects/';
+    const cacheBuster=Date.now();
+    function cacheUrl(url){
+      try {
+        const resolved=new URL(url, window.location.href);
+        if(resolved.protocol === 'file:') return url;
+      } catch (err) {
+        // if URL resolution fails, use original URL
+      }
+      return url + (url.includes('?') ? '&' : '?') + 'v=' + cacheBuster;
+    }
+    function getDescription(text){
+      const match=text.match(/<description>([\s\S]*?)<\/description>/i);
+      const desc=match ? match[1].trim() : '';
+      console.log('Journal getDescription:', desc ? 'found' : 'none', desc);
+      return desc;
+    }
+    function renderText(text, fileUrl){
+      console.log('Journal renderText start', {fileUrl, length:text.length});
+      const cleaned=text.replace(/<description[^>]*>[\s\S]*?<\/description>/gi,'').trim();
+      console.log('Journal renderText cleaned startsWith', cleaned.slice(0,120));
+      const template=document.createElement('template');
+      template.innerHTML=cleaned;
+      template.content.querySelectorAll('img').forEach(img=>{
+        const src=img.getAttribute('src');
+        if(src) img.setAttribute('src', new URL(src, fileUrl).href);
+      });
+      template.content.querySelectorAll('description').forEach(el=>el.remove());
+      function preserveNewlines(node){
+        node.childNodes.forEach(child=>{
+          if(child.nodeType===Node.TEXT_NODE && child.nodeValue.includes('\n')){
+            const parts=child.nodeValue.split('\n');
+            const frag=document.createDocumentFragment();
+            parts.forEach((part,index)=>{
+              frag.appendChild(document.createTextNode(part));
+              if(index<parts.length-1) frag.appendChild(document.createElement('br'));
+            });
+            child.replaceWith(frag);
+          } else if(child.nodeType===Node.ELEMENT_NODE || child.nodeType===Node.DOCUMENT_FRAGMENT_NODE){
+            preserveNewlines(child);
+          }
+        });
+      }
+      preserveNewlines(template.content);
+      return document.importNode(template.content, true);
+    }
+    function loadTextFileViaIframe(url){
+      return new Promise((resolve,reject)=>{
+        const iframe=document.createElement('iframe');
+        iframe.style.display='none';
+        iframe.src=new URL(url, window.location.href).href;
+        iframe.onload=()=>{
+          try{
+            const doc=iframe.contentDocument || iframe.contentWindow.document;
+            const text=(doc.body && doc.body.textContent) || doc.documentElement.textContent || '';
+            resolve(text);
+          } catch(err){
+            reject(err);
+          } finally {
+            document.body.removeChild(iframe);
+          }
+        };
+        iframe.onerror=()=>{
+          document.body.removeChild(iframe);
+          reject(new Error('Failed to load text file via iframe'));
+        };
+        document.body.appendChild(iframe);
+      });
+    }
+    function loadEntryText(item){
+      const url=item.file.startsWith('./')||item.file.startsWith('../') ? item.file : journalBase+item.file;
+      if(window.location.protocol === 'file:'){
+        return Promise.reject(new Error('Local browser security blocks file:// text reads. Run this page through a local HTTP server to enable journal entry parsing.'));
+      }
+      return fetch(cacheUrl(url), {cache:'reload'}).then(response=>{
+        if(!response.ok) throw new Error(response.status+' '+response.statusText);
+        return response.text();
+      });
+    }
+    function showItems(list){
+      entries.innerHTML='';
+      list.forEach(item=>{
+        const btn=document.createElement('button');
+        btn.className='entry';
+        btn.innerHTML=`<h2>${item.name}</h2><p>${item.description||''}</p>`;
+        const p=btn.querySelector('p');
+        const url=item.file.startsWith('./')||item.file.startsWith('../') ? item.file : journalBase+item.file;
+        const mode=item.mode||'text';
+        btn.onclick=()=>{
+          console.log('Journal button click', {name:item.name, url, mode});
+          if(mode==='html'){
+            window.location.href=url;
+            return;
+          }
+          loadEntryText(item).then(text=>{
+            console.log('Journal loaded entry text begins', text.slice(0,200));
+            const descText=getDescription(text);
+            if(descText) p.textContent=descText;
+            title.textContent=item.name;
+            const absoluteUrl=new URL(url, window.location.href).href;
+            const fragment=renderText(text, absoluteUrl);
+            console.log('Journal renderText result', fragment);
+            content.innerHTML='';
+            content.appendChild(fragment);
+            modal.classList.add('show');
+          }).catch(err=>{
+            console.error(err);
+            title.textContent=item.name;
+            if(window.location.protocol === 'file:'){
+              content.innerHTML='<div style="color:#900;font-weight:700;line-height:1.5;">Local file access is blocked by browser security. Start a local HTTP server and open this page with <code>http://localhost:8000/</code>.</div>';
+            } else {
+              content.innerHTML='<object data="'+url+'" type="text/html"></object>';
+            }
+            modal.classList.add('show');
+          });
+        };
+        entries.appendChild(btn);
+      });
+    }
+    if(window.PROJECT_ENTRIES){
+      showItems(window.PROJECT_ENTRIES);
+    } else {
+      const script=document.createElement('script');
+      script.src=cacheUrl('./projects/manifest.js');
+      script.onload=()=>{ if(window.PROJECT_ENTRIES) showItems(window.PROJECT_ENTRIES); else entries.textContent='Could not load entries.'; };
+      script.onerror=()=>{ entries.textContent='Could not load entries.'; };
+      document.head.appendChild(script);
+    }
+    close.onclick=()=>modal.classList.remove('show');
+    modal.onclick=e=>{if(e.target===modal)modal.classList.remove('show');
+    };
+	</script>
+</body>
+</html>

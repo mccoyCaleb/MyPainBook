@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Caleb McCoy</title>
+  <script>if (localStorage.getItem('site-theme') === 'dark') document.documentElement.classList.add('dark-mode');</script>
+  <link rel="stylesheet" href="./css/styles.css">
+  
+</head>
+<body>
+  <div class="sidebar-shell" data-sidebar>
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      <h2>Menu</h2>
+      <a href="./index.html" class="active" aria-current="page">home</a>
+      <a href="./about.html">about</a>
+      <a href="./ai-log.html">ai-log</a>
+      <a href="./journal.html">journal</a>
+      <a href="./projects.html">projects</a>
+      <button class="sidebar-toggle" data-sidebar-toggle type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </nav>
+  </div>
+
+  <div class="page-content home-page">
+    <main>
+      <section class="home-hero reveal" aria-labelledby="home-title">
+        <p class="eyebrow">Engineering notebook</p>
+        <h1 id="home-title">Ideas in progress.</h1>
+        <p class="hero-copy">A living record of what I build, learn, and explore through code.</p>
+        <a class="hero-link" href="./projects.html">Explore the work <span aria-hidden="true">&#8594;</span></a>
+      </section>
+
+      <section class="home-summary reveal" aria-labelledby="summary-title">
+        <div>
+          <p class="eyebrow">Start here</p>
+          <h2 id="summary-title">One notebook, four ways in.</h2>
+        </div>
+        <p>Browse the projects, notes, experiments, and background behind the work. Each page is a different view into the same process.</p>
+      </section>
+
+      <section class="home-links" aria-label="Site sections">
+        <a class="home-link-card reveal" href="./about.html">
+          <span class="card-number">01</span>
+          <h2>About</h2>
+          <p>Background, skills, goals, and the path behind the projects.</p>
+          <span class="card-arrow" aria-hidden="true">&#8594;</span>
+        </a>
+        <a class="home-link-card reveal" href="./projects.html">
+          <span class="card-number">02</span>
+          <h2>Projects</h2>
+          <p>A growing shelf of games, websites, bots, and experiments.</p>
+          <span class="card-arrow" aria-hidden="true">&#8594;</span>
+        </a>
+        <a class="home-link-card reveal" href="./ai-log.html">
+          <span class="card-number">03</span>
+          <h2>AI Log</h2>
+          <p>Working notes and conversations from building with AI.</p>
+          <span class="card-arrow" aria-hidden="true">&#8594;</span>
+        </a>
+        <a class="home-link-card reveal" href="./journal.html">
+          <span class="card-number">04</span>
+          <h2>Journal</h2>
+          <p>Longer reflections, discoveries, and lessons from the process.</p>
+          <span class="card-arrow" aria-hidden="true">&#8594;</span>
+        </a>
+      </section>
+    </main>
+
+    <div class="settings-shell" data-settings>
+      <button class="settings-toggle" data-settings-toggle type="button" aria-label="Open settings" aria-expanded="false">⚙</button>
+      <aside class="settings-panel" aria-label="Settings">
+        <h2>Settings</h2>
+        <label class="settings-option"><span>Dark mode</span><input type="checkbox" data-theme-toggle></label>
+        <label class="settings-option settings-range"><span>Font size <output data-font-size-value>100%</output></span><input type="range" data-font-size min="80" max="130" value="100" step="5"></label>
+        <label class="settings-option"><span>ADHD mode</span><input type="checkbox" data-adhd-toggle></label>
+      </aside>
+    </div>
+
+    <div class="adhd-gif-shell" data-adhd-gif>
+      <img class="adhd-gif" src="./images/10 Minutes Minecraft Parkour Gameplay [Free to Use] [Download] - GianLeco (1080p, h264, youtube).gif" alt="Minecraft parkour gameplay for ADHD mode">
+    </div>
+
+  </div>
+  <script src="./js/script.js"></script>
+</body>
+</html>
