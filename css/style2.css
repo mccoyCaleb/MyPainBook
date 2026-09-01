@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #f0f0f0;
-}
 
 .container {
   max-width: 800px;
@@ -59,6 +55,7 @@ body {
 
 .slide.active {
   opacity: 1;
+  color: blue;
 }
 
 .slide-img {

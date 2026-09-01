@@ -1,9 +1,9 @@
 window.PROJECT_ENTRIES = [
   {
     name: 'Discord Bot',
-    file: 'DiscordBot.txt',
+    file: 'DiscordBot.html',
     description: 'Project notes for the Discord bot.',
-    mode: 'text'
+    mode: 'html'
   },
   {
     name: 'GyroQuest',

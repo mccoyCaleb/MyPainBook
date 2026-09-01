@@ -96,7 +96,14 @@ html.dark-mode {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
+.content {
+  line-height: 1;
+}
 
+.content p {
+  margin: 0.15em 0;
+  line-height: 1;
+}
 nav a,
 .nav a {
   color: var(--primary-dark);
@@ -137,6 +144,9 @@ form {
 label {
   display: grid;
   gap: 4px;
+}
+p {
+  margin: 0.25em 0;
 }
 
 input {
