@@ -45,7 +45,7 @@ const title=document.getElementById('title');
 const content=document.getElementById('content');
 const body=document.querySelector('.body');
 const close=document.getElementById('close');
-const aiBase='./AI-entrees/';
+const aiBase='./Ai-entrees/';
 const cacheBuster=Date.now();
 function cacheUrl(url){
   try {
@@ -145,7 +145,7 @@ if(window.AI_ENTRIES){
   showItems(window.AI_ENTRIES);
 } else {
   const script=document.createElement('script');
-  script.src=cacheUrl('./AI-entrees/manifest.js');
+  script.src=cacheUrl('./Ai-entrees/manifest.js');
   script.onload=()=>{ if(window.AI_ENTRIES) showItems(window.AI_ENTRIES); else entries.textContent='Could not load entries.'; };
   script.onerror=()=>{ entries.textContent='Could not load entries.'; };
   document.head.appendChild(script);

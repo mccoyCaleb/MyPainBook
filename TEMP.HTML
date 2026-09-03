@@ -14,18 +14,20 @@
         <h1 class="carousel-heading">GeeksforGeeks</h1>
         <h3>A computer science portal for geeks</h3>
       </div>
+      <button id="prevBtn" class="nav-btn">
+        ---&gt;
+      </button>
+      <button id="nextBtn" class="nav-btn">
+        &lt;----
+      </button>
 
       <div class="slideshow">
-        <button id="prevBtn" class="nav-btn" aria-label="Previous slide">&#10094;</button>
-        <button id="nextBtn" class="nav-btn" aria-label="Next slide">&#10095;</button>
-
-        <button class="slide-btn slide-btn-1 active" type="button" aria-label="Show slide 1"></button>
-        <button class="slide-btn slide-btn-2" type="button" aria-label="Show slide 2"></button>
-        <button class="slide-btn slide-btn-3" type="button" aria-label="Show slide 3"></button>
-        <button class="slide-btn slide-btn-4" type="button" aria-label="Show slide 4"></button>
-
+        <button class="slide-btn slide-btn-1"></button>
+        <button class="slide-btn slide-btn-2"></button>
+        <button class="slide-btn slide-btn-3"></button>
+        <button class="slide-btn slide-btn-4"></button>
         <div class="slideshow-wrapper">
-          <div class="slide active">
+          <div class="slide">
             <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818140124/image1-300x169.png" alt="Image 1">
           </div>
           <div class="slide">
@@ -41,55 +43,56 @@
       </div>
     </div>
   </div>
+<script>
+const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
 
-  <script>
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    const slideButtons = Array.from(document.querySelectorAll('.slide-btn'));
-    let currentSlide = 0;
+function showSlide(index) {
 
-    function showSlide(index) {
-      if (index >= slides.length) {
+    // Remove active class from all slides
+    slides.forEach(slide => {
+        slide.classList.remove('active');
+    });
+
+    // Wrap around if needed
+    if (index >= slides.length) {
         currentSlide = 0;
-      } else if (index < 0) {
+    }
+    else if (index < 0) {
         currentSlide = slides.length - 1;
-      } else {
+    }
+    else {
         currentSlide = index;
-      }
-
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === currentSlide);
-      });
-
-      slideButtons.forEach((button, i) => {
-        button.classList.toggle('active', i === currentSlide);
-      });
     }
 
-    document.getElementById('nextBtn').addEventListener('click', () => {
-      showSlide(currentSlide + 1);
-    });
+    slides[currentSlide].classList.add('active');
+}
 
-    document.getElementById('prevBtn').addEventListener('click', () => {
-      showSlide(currentSlide - 1);
-    });
+// Next button
+document.getElementById('nextBtn').addEventListener('click', () => {
+    showSlide(currentSlide + 1);
+});
 
-    slideButtons.forEach((button, index) => {
-      button.addEventListener('click', () => {
-        showSlide(index);
-      });
-    });
+// Previous button
+document.getElementById('prevBtn').addEventListener('click', () => {
+    showSlide(currentSlide - 1);
+});
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowRight') {
+// Keyboard controls
+document.addEventListener('keydown', (event) => {
+
+    if (event.key === 'ArrowRight') {
         showSlide(currentSlide + 1);
-      }
+    }
 
-      if (event.key === 'ArrowLeft') {
+    if (event.key === 'ArrowLeft') {
         showSlide(currentSlide - 1);
-      }
-    });
+    }
 
-    showSlide(0);
-  </script>
+});
+
+// Initialize
+showSlide(0);
+</script>
 </body>
 </html>

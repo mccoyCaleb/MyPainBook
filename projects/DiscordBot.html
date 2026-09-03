@@ -10,93 +10,94 @@
 </div>
 </div>
 
-<div class="content">
-    <p>this all is a test</p>
-	<p>Week Number: 1</p>
-	<p>Goals: finish website, plan another thing??</p>
-	<p>Accomplishments: website, </p>
-	<p>Biggest Challenge: dealing with ai for the buttons( i didnt want to code that part)</p>
-	<p>What You Learned: AI is a bum, it overcomplicates stuff, maybe i should of made it</p>
-	<p>Goals for Next Week: next project, maybe apply for scholarships, who knows</p>
-</div>
- <div class="container">
-    
-      <div class="slideshow">
-        <button id="prevBtn" class="nav-btn" aria-label="Previous slide">&#10094;</button>
-        <button id="nextBtn" class="nav-btn" aria-label="Next slide">&#10095;</button>
+<div class="project-layout">
+  <div class="project-carousel-panel">
+    <div class="slideshow">
+      <button id="prevBtn" class="nav-btn" aria-label="Previous slide">&#10094;</button>
+      <button id="nextBtn" class="nav-btn" aria-label="Next slide">&#10095;</button>
 
-        <button class="slide-btn slide-btn-1 active" type="button" aria-label="Show slide 1"></button>
-        <button class="slide-btn slide-btn-2" type="button" aria-label="Show slide 2"></button>
-        <button class="slide-btn slide-btn-3" type="button" aria-label="Show slide 3"></button>
-        <button class="slide-btn slide-btn-4" type="button" aria-label="Show slide 4"></button>
+      <button class="slide-btn slide-btn-1 active" type="button" aria-label="Show slide 1"></button>
+      <button class="slide-btn slide-btn-2" type="button" aria-label="Show slide 2"></button>
+      <button class="slide-btn slide-btn-3" type="button" aria-label="Show slide 3"></button>
+      <button class="slide-btn slide-btn-4" type="button" aria-label="Show slide 4"></button>
 
-        <div class="slideshow-wrapper">
-          <div class="slide active">
-            <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818140124/image1-300x169.png" alt="Image 1">
-          </div>
-          <div class="slide">
-            <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818140126/image2-300x169.png" alt="Image 2">
-          </div>
-          <div class="slide">
-            <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818190339/image5-300x185.png" alt="Image 3">
-          </div>
-          <div class="slide">
-            <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818141837/image4-300x168.png" alt="Image 4">
-          </div>
+      <div class="slideshow-wrapper">
+        <div class="slide active">
+          <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818140124/image1-300x169.png" alt="Image 1">
+        </div>
+        <div class="slide">
+          <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818140126/image2-300x169.png" alt="Image 2">
+        </div>
+        <div class="slide">
+          <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818190339/image5-300x185.png" alt="Image 3">
+        </div>
+        <div class="slide">
+          <img class="slide-img" src="https://media.geeksforgeeks.org/wp-content/uploads/20210818141837/image4-300x168.png" alt="Image 4">
         </div>
       </div>
     </div>
   </div>
 
-  <script>
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    const slideButtons = Array.from(document.querySelectorAll('.slide-btn'));
-    let currentSlide = 0;
+  <div class="project-copy">
+    <h2>Discord Bot Project</h2>
+    <p>this all is a test</p>
+    <p>Week Number: 1</p>
+    <p>Goals: finish website, plan another thing??</p>
+    <p>Accomplishments: website, </p>
+    <p>Biggest Challenge: dealing with ai for the buttons( i didnt want to code that part)</p>
+    <p>What You Learned: AI is a bum, it overcomplicates stuff, maybe i should of made it</p>
+    <p>Goals for Next Week: next project, maybe apply for scholarships, who knows</p>
+  </div>
+</div>
 
-    function showSlide(index) {
-      if (index >= slides.length) {
-        currentSlide = 0;
-      } else if (index < 0) {
-        currentSlide = slides.length - 1;
-      } else {
-        currentSlide = index;
-      }
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const slideButtons = Array.from(document.querySelectorAll('.slide-btn'));
+  let currentSlide = 0;
 
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === currentSlide);
-      });
-
-      slideButtons.forEach((button, i) => {
-        button.classList.toggle('active', i === currentSlide);
-      });
+  function showSlide(index) {
+    if (index >= slides.length) {
+      currentSlide = 0;
+    } else if (index < 0) {
+      currentSlide = slides.length - 1;
+    } else {
+      currentSlide = index;
     }
 
-    document.getElementById('nextBtn').addEventListener('click', () => {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentSlide);
+    });
+
+    slideButtons.forEach((button, i) => {
+      button.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    showSlide(currentSlide + 1);
+  });
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    showSlide(currentSlide - 1);
+  });
+
+  slideButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      showSlide(index);
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') {
       showSlide(currentSlide + 1);
-    });
+    }
 
-    document.getElementById('prevBtn').addEventListener('click', () => {
+    if (event.key === 'ArrowLeft') {
       showSlide(currentSlide - 1);
-    });
+    }
+  });
 
-    slideButtons.forEach((button, index) => {
-      button.addEventListener('click', () => {
-        showSlide(index);
-      });
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowRight') {
-        showSlide(currentSlide + 1);
-      }
-
-      if (event.key === 'ArrowLeft') {
-        showSlide(currentSlide - 1);
-      }
-    });
-
-    showSlide(0);
-  </script>
+  showSlide(0);
+</script>
 </body>
-</html>
 </html>
