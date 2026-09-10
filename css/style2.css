@@ -116,7 +116,10 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  max-width: none;
+  margin: 0;
+  object-fit: fill;
+  object-position: center;
 }
 
 .nav-btn {

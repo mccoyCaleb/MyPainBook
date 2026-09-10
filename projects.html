@@ -48,7 +48,7 @@
 			<img class="adhd-gif" src="./images/10 Minutes Minecraft Parkour Gameplay [Free to Use] [Download] - GianLeco (1080p, h264, youtube).gif" alt="Minecraft parkour gameplay for ADHD mode">
 		</div>
 
-		<p>nothing here yet</p>
+    <div id="sortingBar"><button id="sortBAll">all</button><button id="sortBWeb">web</button><button id="sortBJava">java</button><button id="sortBOther">other</button></div>
 		<div id="entries"></div>
 		<div id="modal"><div class="card"><div class="header-box"><h2 id="title"></h2><button class="close" id="close">×</button></div><div class="body"><div class="content" id="content"></div></div></div></div>
 	</div>
@@ -148,6 +148,7 @@
         const p=btn.querySelector('p');
         const url=item.file.startsWith('./')||item.file.startsWith('../') ? item.file : journalBase+item.file;
         const mode=item.mode||'text';
+        const type=item.type||'other';
         btn.onclick=()=>{
           console.log('Journal button click', {name:item.name, url, mode});
           if(mode==='html'){
@@ -179,6 +180,18 @@
         entries.appendChild(btn);
       });
     }
+    function applyFilter(filterType) {
+     const list = filterType === 'all'
+       ? window.PROJECT_ENTRIES
+       : window.PROJECT_ENTRIES.filter(item => (item.type || 'other') === filterType);
+
+     showItems(list);
+    }
+
+    document.getElementById('sortBAll').addEventListener('click', () => applyFilter('all'));
+    document.getElementById('sortBWeb').addEventListener('click', () => applyFilter('web'));
+    document.getElementById('sortBJava').addEventListener('click', () => applyFilter('java'));
+    document.getElementById('sortBOther').addEventListener('click', () => applyFilter('other'));
     if(window.PROJECT_ENTRIES){
       showItems(window.PROJECT_ENTRIES);
     } else {

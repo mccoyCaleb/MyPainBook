@@ -1,0 +1,24 @@
+prompt: i am trying to use the variable type on like 151, i am trying to add a sorting system so that when i press say the web, other, or java button it will sort them so that only that type shows up, how should i go about doing htat
+
+result function applyFilter(filterType) {
+  const list = filterType === 'all'
+    ? window.PROJECT_ENTRIES
+    : window.PROJECT_ENTRIES.filter(item => (item.type || 'other') === filterType);
+
+  showItems(list);
+}
+
+document.getElementById('sortBAll').addEventListener('click', () => applyFilter('all'));
+document.getElementById('sortBWeb').addEventListener('click', () => applyFilter('web'));
+document.getElementById('sortBJava').addEventListener('click', () => applyFilter('java'));
+document.getElementById('sortBOther').addEventListener('click', () => applyFilter('other'));
+
+result, i implemented in the right place but it didn't necessarily work, i am thinking on how to fix it, possibly making it refresh the page
+in some way is the plan????
+
+2nd prompt: so after it switches it might be working but i dont know, i am assuming because it already has been rendered but it dosent get rid of the instances that arent there, is there some way to refresh the page, and save it or is that not efficient
+
+realized my dumb ahh, needed to put "document.getElementById('sortBAll').addEventListener('click', () => applyFilter('all'));
+document.getElementById('sortBWeb').addEventListener('click', () => applyFilter('web'));
+document.getElementById('sortBJava').addEventListener('click', () => applyFilter('java'));
+document.getElementById('sortBOther').addEventListener('click', () => applyFilter('other'));" not in the if statement that renders when the page first renders, and instead put it into the current rendering function so it keeps reapplying itself. What I am saying is it works now

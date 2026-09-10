@@ -16,5 +16,11 @@ window.AI_ENTRIES = [
     file: 'Ai_log1.txt',
     description: 'This is my AI log entry for the about me page changes',
     mode: 'text'
-  }
+  },
+  {
+    name: 'Ai log filtering',
+    file: 'IAmDumb.txt',
+    description: 'This is my AI log entry for the filtering systemf',
+    mode: 'text'
+  },
 ];

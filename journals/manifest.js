@@ -23,4 +23,10 @@ window.JOURNAL_ENTRIES = [
     description: 'This is week 2',
     mode: 'text'
   }, 
+  {
+    name: 'journal 3 text 9/4/26',
+    file: 'journal3.txt',
+    description: 'This is week3',
+    mode: 'text'
+  }, 
 ];
