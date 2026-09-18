@@ -35,4 +35,10 @@ window.JOURNAL_ENTRIES = [
     description: 'Trying to figure out what new food to try',
     mode: 'text'
   }, 
+   {
+    name: 'journal 5 text 9/18/26',
+    file: 'journal5.txt',
+    description: 'setup of the new project',
+    mode: 'text'
+  }, 
 ];
