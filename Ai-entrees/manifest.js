@@ -23,4 +23,10 @@ window.AI_ENTRIES = [
     description: 'This is my AI log entry for the filtering systemf',
     mode: 'text'
   },
+   {
+    name: 'Jarvis, make me a website',
+    file: 'JarvisINeedABaseWebSite.txt',
+    description: 'This is my AI log entry for base website template i wont keep for my cyber website',
+    mode: 'text'
+  },
 ];
