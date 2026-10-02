@@ -1,0 +1,13 @@
+so i have been using ai to quickly update my notes and format them, it has been going well but i am giving the its credit mostly
+i usually say here is my notes.txt and here is what you need to seperate each part tnto and put stuff into 
+<div class="accordion-item">
+            <button class="accordion-toggle" type="button" aria-expanded="false">ARP <span>+</span></button>
+            <div class="accordion-panel">
+              <p><strong>ARP</strong> stands for <strong>Address Resolution Protocol</strong>. It helps a device match an <strong>IP address</strong> to a <strong>MAC address</strong> on the same local network.</p>
+              <p>When your computer wants to send data to another device on the same LAN, it usually knows the destination IP address but not the destination MAC address. ARP helps solve that problem by asking, “Who has this IP address?” and the device with that IP responds with its MAC address.</p>
+              <p>Think of it like this: the IP address is the street address, but the MAC address is the actual hardware identifier for the device on the local network. ARP connects those two layers so the packet can be delivered correctly.</p>
+              <p>ARP is especially important on local networks because it helps devices communicate before traffic leaves the network segment.</p>
+              <p><strong>Quick memory trick:</strong> ARP = <strong>IP to MAC</strong> on the LAN.</p>
+            </div>
+          </div>
+and so they put stuff in and i just paste it in because its using my format of css and stuff and makes my life easier

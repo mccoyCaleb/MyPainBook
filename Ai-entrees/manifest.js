@@ -29,4 +29,10 @@ window.AI_ENTRIES = [
     description: 'This is my AI log entry for base website template i wont keep for my cyber website',
     mode: 'text'
   },
+  {
+    name: 'using ai to insert my notes',
+    file: 'AI_And_passive_updgrades.txt',
+    description: 'This is my AI log entry for giving credit to the ai insterting my notes',
+    mode: 'text'
+  },
 ];
