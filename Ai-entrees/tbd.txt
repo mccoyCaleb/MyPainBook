@@ -1,0 +1,3 @@
+So i am wanting to make a game sort of, for review sake of the ap ciriculum, and take from my notes, and have it evalulate warnings, and have solutions and evalulations of the warnings, 
+so I am going to ask the ai using the chat model of the built in ai to evalulate My notes and search for senario questions and make a bank, 
+from there i will gather the banks for each unit and make them stack ontop of eachother 

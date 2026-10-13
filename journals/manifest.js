@@ -47,4 +47,10 @@ window.JOURNAL_ENTRIES = [
     description: 'setup of the new project',
     mode: 'text'
   }, 
+  {
+    name: 'journal 7 text 10/9/26',
+    file: 'journal6.txt',
+    description: 'setup of the new project',
+    mode: 'text'
+  }, 
 ];
