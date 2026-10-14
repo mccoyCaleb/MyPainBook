@@ -49,8 +49,8 @@ window.JOURNAL_ENTRIES = [
   }, 
   {
     name: 'journal 7 text 10/9/26',
-    file: 'journal6.txt',
-    description: 'setup of the new project',
+    file: 'journal7.txt',
+    description: 'I am checking why wont this page publish',
     mode: 'text'
   }, 
 ];
