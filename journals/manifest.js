@@ -53,4 +53,10 @@ window.JOURNAL_ENTRIES = [
     description: 'I am checking why wont this page publish',
     mode: 'text'
   }, 
+  {
+    name: 'journal 8 text 10/16/26',
+    file: 'journal8.txt',
+    description: 'just another week',
+    mode: 'text'
+  }, 
 ];

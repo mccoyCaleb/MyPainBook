@@ -1,0 +1,9 @@
+Week Number: 10/16/26
+Goals: done with extra stuff
+Accomplishments: quiz thing after each unit with bank etc
+Biggest Challenge: Uhhh this week was easy, but i would have to say just 
+making sure i stay on task, or cloudflare, because setting up the subdomain
+was a pain in the butt with the dns, because it just didnt want to host both the sites at once
+and i am talking about my rasberry pi also
+What You Learned: i guess nothing, i already knew most of the stuff like setting up the website
+Goals for Next Week: keep workiing on finsihing up the website
