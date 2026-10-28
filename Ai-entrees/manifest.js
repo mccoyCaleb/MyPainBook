@@ -35,4 +35,10 @@ window.AI_ENTRIES = [
     description: 'This is my AI log entry for giving credit to the ai insterting my notes',
     mode: 'text'
   },
+  {
+    name: 'CyberAcademy LMS fixes',
+    file: 'CyberAcademyLMSFixes.txt',
+    description: 'This is my AI log entry for fixing the student and teacher portal lesson flow',
+    mode: 'text'
+  },
 ];

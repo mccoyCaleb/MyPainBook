@@ -1,0 +1,159 @@
+What I Asked — i need you to fix the student and teacher portal so the student lessons show the real notes from the original course files, the teacher dashboard exposes all units and modules, the original lesson buttons and accordion behavior need to work again, and the extra notes-box textarea needs to go away.
+
+Why I Asked — the app was showing placeholder content instead of the actual lesson material, the teacher sections were not showing the whole curriculum, and the lesson pages were losing the interactive behavior from the original cyberacademy lessons. It was making the site look broken and not match the course design.
+
+What Did AI Give Me? — it gave me a fix that tied the lesson page to the original source HTML, kept the accordion and option-button interactions active, removed the extra notes-box textarea, and updated the teacher side so all real units and modules show up. It also suggested test coverage for the actual lesson flow so we could catch regressions.
+
+**ADDED — student lesson layout and behavior**
+
+```js
+const notes = (getLessonSourceHtml(lesson) || lesson.content || 'The lesson content is ready to be migrated into the LMS editor.')
+  .replace(/<div class="notes-box">[\s\S]*?<\/div>/gi, '');
+```
+
+This pulled the real curriculum content from the course HTML and stripped the extra notes box before the lesson rendered. It was important because the app was previously replacing the original content with placeholder text and that made the page look wrong and incomplete.
+
+```js
+document.querySelectorAll('.accordion-toggle').forEach((button) => {
+  const item = button.closest('.accordion-item');
+  const panel = item ? item.querySelector('.accordion-panel') : null;
+  if (!panel) return;
+  panel.hidden = !item.classList.contains('open');
+  button.addEventListener('click', () => {
+    const shouldOpen = !item.classList.contains('open');
+    item.classList.toggle('open', shouldOpen);
+    button.setAttribute('aria-expanded', String(shouldOpen));
+    panel.hidden = !shouldOpen;
+  });
+});
+```
+
+This restores the original accordion behavior so lesson sections expand and collapse like the original course pages. Without this, users could see the content but the interactive slide-down sections would not behave correctly.
+
+```js
+document.querySelectorAll('.quiz-card').forEach((card) => {
+  const correctValue = card.dataset.correct;
+  const buttons = card.querySelectorAll('.option-button');
+  const answerBox = card.querySelector('.answer-box');
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const selected = button.dataset.answer;
+      buttons.forEach((btn) => {
+        btn.disabled = true;
+        btn.classList.remove('selected', 'correct', 'incorrect');
+        if (btn.dataset.answer === correctValue) {
+          btn.classList.add('correct');
+        }
+      });
+
+      button.classList.add('selected');
+      if (selected === correctValue) {
+        button.classList.add('correct');
+      } else {
+        button.classList.add('incorrect');
+      }
+
+      if (answerBox) {
+        answerBox.hidden = false;
+      }
+    });
+  });
+});
+```
+
+This brings back the original question/reveal behavior. The buttons act like real multiple-choice interactions instead of just static text, and the answer box opens after selection.
+
+**ADDED — teacher dashboard and curriculum panel**
+
+```js
+const units = defaultCourse ? db.prepare('SELECT * FROM units WHERE course_id = ? ORDER BY sort_order ASC').all(defaultCourse.id) : [];
+const defaultUnit = units[0];
+const modules = defaultUnit ? db.prepare('SELECT * FROM lessons WHERE unit_id = ? ORDER BY order_index ASC').all(defaultUnit.id) : [];
+```
+
+This is the structure for the teacher curriculum manager. It loads the course, collects all the units, and then shows modules for the selected unit so the teacher can manage teaching content in the same way a real LMS would.
+
+```js
+const groupedModuleOptions = units.map((unit) => {
+  const unitModules = allModules.filter((module) => module.unit_id === unit.id);
+  return `
+    <optgroup label="${unit.code} • ${unit.title}">
+      ${unitModules.map((module) => `<option value="${module.id}">${module.slug} • ${module.title} ${module.published ? '(Published)' : '(Draft)'}</option>`).join('') || '<option value="">No modules in this unit</option>'}
+    </optgroup>
+  `;
+}).join('');
+```
+
+This makes the teacher dropdowns show each unit and each module inside it. It helps the teacher publish lessons in the right place instead of dumping everything together in one flat list.
+
+```js
+const rowHtml = classes.length ? classes.map((cls) => `
+  <div class="class-card">
+    <h3>${cls.name}</h3>
+    <p>${cls.section}</p>
+    <small>${cls.student_count} students</small>
+  </div>
+`).join('') : '<p>No classes yet.</p>';
+```
+
+This section renders the teacher’s class information in the dashboard. It creates the card layout that keeps the class data clean and readable instead of a messy raw database dump.
+
+**ADDED — shared style system for dashboard and portal**
+
+```css
+:root {
+  --bg:#edf3f8; --panel:#fff; --ink:#132638; --muted:#52677d; --line:#dfeaf4;
+  --primary:#1f4e79; --primary-soft:#edf4fc; --success:#1d7a5f; --success-soft:#eafaf3;
+}
+```
+
+This is the main design system for the portal. It defines the colors, card backgrounds, borders, and spacing so the teacher dashboard, student dashboard, and lesson pages all feel like one connected app instead of random pages.
+
+```css
+.shell { max-width:1200px; margin:0 auto; padding:28px 20px 40px; }
+.layout { display:grid; grid-template-columns: 1.5fr 0.8fr; gap:24px; }
+.panel { background:var(--panel); border:1px solid var(--line); border-radius:18px; box-shadow:0 16px 30px rgba(19,41,64,0.06); }
+```
+
+This gives the layout structure for all the real app pages. It creates the left-and-right structure for content and activities, keeps cards consistent, and makes the app feel like a proper learning platform instead of a basic static page.
+
+```css
+.quiz-card { margin-top:18px; padding:18px; border:1px solid var(--line); border-radius:14px; background:#f9fbff; }
+.option-button.correct { border-color:#1d7a5f; background:#eafaf3; }
+.option-button.incorrect { border-color:#b42318; background:#fdf3f3; }
+.answer-box { margin-top:14px; padding:12px 14px; border-radius:10px; background:#eefcf5; border:1px solid rgba(29,122,95,0.2); color:#184a38; }
+```
+
+This is the visual styling for the interactive quiz cards. It tells the browser how correct and incorrect answers should appear, so the reinforcement feedback is obvious and consistent.
+
+**ADDED — teacher assignment scheduler and class assignment flow**
+
+```js
+const classOptions = teacherClasses.length
+  ? teacherClasses.map((cls) => `<option value="${cls.id}">${cls.name}${cls.section ? ` • ${cls.section}` : ''}</option>`).join('')
+  : '<option value="">No classes created yet</option>';
+```
+
+This ensures the teacher can assign work to a class instead of just a lesson. It is the class-based scheduling piece that makes the portal feel like a real class management system.
+
+```js
+db.prepare(`
+  INSERT INTO assignments (lesson_id, class_id, title, release_at, due_at, published, created_by)
+  VALUES (?, ?, ?, ?, ?, 1, ?)
+`).run(lessonId, classId || null, assignmentTitle, releaseAt || null, dueAt || null, req.user.id);
+```
+
+This saves a teacher assignment into the database with both the lesson and the class it belongs to. It is the actual scheduling logic behind the teacher assignment system.
+
+What Did I Change? — i updated the lesson route so it uses the actual source notes instead of dressed-up placeholder text, kept the original accordion and choice-button script alive so the HTML still behaves the way the classroom content was originally designed, and removed the extra notes-box section that was being injected when it should not be there. I also rebuilt the teacher dashboard styling, curriculum manager dropdowns, and assignment flow so the whole portal matched the course structure instead of acting like a generic template.
+
+Did It Work? — yes, i reran the test suite and it passed. 12 tests passed and 0 failed. The lesson pages showed the real notes, the teacher pages showed all valid units and modules, the assignment controls worked, and the original interactive behavior from the course content was restored.
+
+prompt used: can you fix the student and teacher login flow, make the student lessons use the real course notes instead of placeholders, restore the original accordion/button behavior, remove the notes textbox, and make sure the teacher pages expose all units and modules
+
+result: fixed the lesson route to use the actual course HTML, kept the quizzes and accordion logic active, stripped the extra notes-box from the rendered notes, rebuilt the teacher dashboard and assignment tools to match the real course structure, and added verification tests so the portal keeps matching the original learning design.
+
+**extra note**
+this part was about more than just one bug. i had to rebuild the actual portal experience so the student and teacher pages felt like the same school system instead of two separate test pages. the real win was making each lesson look like the original content, while the teacher side was organized by course, unit, and module like it was supposed to be.
+
