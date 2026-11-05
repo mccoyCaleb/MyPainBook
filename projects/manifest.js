@@ -33,5 +33,12 @@ window.PROJECT_ENTRIES = [
     description: 'Project notes for Website for Web.',
     type: 'web',
     mode: 'text'
+  },
+  {
+    name: 'Website for CsForGood: CyberAcademy',
+    file: 'CsForGoodCyberAcademy.html',
+    description: 'Project notes for Website for CsForGood: CyberAcademy.',
+    type: 'web',
+    mode: 'html'
   }
 ];
