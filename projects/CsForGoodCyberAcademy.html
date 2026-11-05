@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" href="../css/styles.css">
+   <link rel="stylesheet" href="../css/style2.css">
+</head>
+<body>
+<div class="header">
+<h1>Caleb McCoys website</h1><div class ="back"><button onclick="window.location.href='../projects.html'">back</button>
+</div>
+</div>
+
+<div class="project-layout">
+  <div class="project-carousel-panel">
+    <div class="slideshow">
+      <button id="prevBtn" class="nav-btn" aria-label="Previous slide">&#10094;</button>
+      <button id="nextBtn" class="nav-btn" aria-label="Next slide">&#10095;</button>
+
+      <button class="slide-btn slide-btn-1 active" type="button" aria-label="Show slide 1"></button>
+      <button class="slide-btn slide-btn-2" type="button" aria-label="Show slide 2"></button>
+      <button class="slide-btn slide-btn-3" type="button" aria-label="Show slide 3"></button>
+      <button class="slide-btn slide-btn-4" type="button" aria-label="Show slide 4"></button>
+
+      <div class="slideshow-wrapper">
+        <div class="slide active">
+          <iframe class="slide-frame" src="https://cyber.mywebhoster.org/" title="CyberAcademy Secure Learning Platform" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-copy">
+    <h2>CS for good Project: Cyber Academy</h2>
+   <p>My project CyberAcademy uses computer science and AI to improve cybersecurity</p>
+   <p>education in schools.The platform offers personalized learning resources,</p>
+   <p>interactive activities, and teacher dashboards that track student progress.</p>
+   <p>It helps students build critical cybersecurity skills needed to stay safe</p>
+   <p>and succeed in the Ap cyber security course.</p>
+
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const slideButtons = Array.from(document.querySelectorAll('.slide-btn'));
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    if (index >= slides.length) {
+      currentSlide = 0;
+    } else if (index < 0) {
+      currentSlide = slides.length - 1;
+    } else {
+      currentSlide = index;
+    }
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentSlide);
+    });
+
+    slideButtons.forEach((button, i) => {
+      button.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    showSlide(currentSlide + 1);
+  });
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    showSlide(currentSlide - 1);
+  });
+
+  slideButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      showSlide(index);
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') {
+      showSlide(currentSlide + 1);
+    }
+
+    if (event.key === 'ArrowLeft') {
+      showSlide(currentSlide - 1);
+    }
+  });
+
+  showSlide(0);
+</script>
+</body>
+</html>
